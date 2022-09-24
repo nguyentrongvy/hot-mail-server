@@ -11,6 +11,7 @@ class BaseController {
     }
 
     _getAllMethods() {
+        // this trong class cha là gì (khi con kết thừa cha)
         const proto = Object.getPrototypeOf(this);
         return Object.getOwnPropertyNames(proto)
             .filter(m => typeof this[m] === 'function' && m !== 'constructor');

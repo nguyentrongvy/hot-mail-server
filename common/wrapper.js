@@ -13,10 +13,12 @@ function isAsync(f) {
 exports.tryCatchWrapper = f => {
     if (typeof f === 'function') {
         if (isAsync(f)) {
+            console.log('f', f);
             return async function (req, res, next) {
                 try {
                     await f(req, res);
                 } catch (error) {
+                    console.log(error);
                     next(error);
                 }
             };
@@ -25,6 +27,7 @@ exports.tryCatchWrapper = f => {
             try {
                 f(req, res);
             } catch (error) {
+                console.log(error);
                 next(error);
             }
         };

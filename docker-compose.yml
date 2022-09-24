@@ -1,0 +1,45 @@
+version: "3.7"
+volumes:
+  mongodata:
+
+services:
+  app:
+    image: blog:v1
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB_NAME=${DB_NAME}
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PORT=${REDIS_PORT}
+      - PORT=${PORT}
+    ports:
+      - "${PORT}:${PORT}" # phần này ta định nghĩa ở file .env nhé
+    restart: unless-stopped
+    depends_on:
+        - redis
+        - db
+    networks:
+      - db-network
+      - redis-network
+
+  db:
+    image: mongo
+    volumes:
+      - mongodata:/data/db
+    restart: unless-stopped
+    networks:
+      - db-network
+  
+  redis:
+    image: redis:5-alpine
+    volumes:
+      - .docker/data/redis:/data
+    restart: unless-stopped
+    networks:
+      - redis-network
+
+#Docker network
+networks:
+  db-network:
+    driver: bridge
+  redis-network:
+    driver: bridge

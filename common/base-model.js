@@ -1,6 +1,7 @@
 // @ts-check
 
 const mongoose = require('mongoose');
+// const crypto = require('crypto');
 
 const Common = require('../constants/common');
 
@@ -31,6 +32,21 @@ class BaseModel {
 
     init() {
         const schema = new mongoose.Schema(this.schema, this.options);
+
+        // if (this.modelName === 'AdminUser') {
+        //     schema.methods.setPassword = password => {
+        //         this.salt = crypto.randomBytes(16).toString('hex');
+
+        //         this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
+        //     };
+
+        //     schema.methods.validPassword = password => {
+        //         const hash = crypto.pbkdf2Sync(password, this.schema.salt, 1000, 64, 'sha512').toString('hex');
+
+        //         return this.schema.hash === hash;
+        //     };
+        // }
+
         return mongoose.model(this.modelName, schema);
     }
 }

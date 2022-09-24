@@ -10,20 +10,27 @@ module.exports = logger => (err, req, res, next) => {
     if (err instanceof ValidationError) {
         logger.error(err.details);
 
-        const messages = [];
+        const messages = {};
         const details = _.get(err, 'details');
         for (const key in details) {
             for (const error of details[key]) {
-                messages.push(error.message);
+                // messages.push({
+                //     key: error.context.key,
+                //     message: error.message,
+                // });
+
+                messages[error.context.key] = error.message;
             }
         }
 
         const dataResponse = {};
-        if (messages.length === 1) {
-            dataResponse.message = messages[0];
-        } else if (messages.length > 1) {
-            dataResponse.messages = messages;
-        }
+        // if (messages.length === 1) {
+        //     dataResponse.message = messages[0];
+        // } else if (messages.length > 1) {
+        //     dataResponse.messages = messages;
+        // }
+
+        dataResponse.messages = messages;
         return res.status(err.statusCode).json(dataResponse);
     }
 
@@ -43,6 +50,7 @@ module.exports = logger => (err, req, res, next) => {
     }
 
     logger.error(err, 'unexpected error');
+    console.log(err);
     res.status(StatusCodes.INTERNAL_SERVER_ERROR)
         .json({
             message: 'unexpected error',

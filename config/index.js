@@ -7,8 +7,14 @@ exports.getCORSOrigin = () => {
     return origins.split(',').map(o => o.trim());
 };
 
+const dbHost = process.env.DB_HOST || 'localhost';
+const dbPort = process.env.DB_PORT || 27017;
+const dbName = process.env.DB_NAME || 'test';
+// const mongoUrl = `mongodb://${dbHost}:${dbPort}/${dbName}`
+
 exports.mongoConfig = {
-    connection: process.env.MONGO_CONNECTION || 'mongodb://localhost:27017/test',
+    // connection: process.env.MONGO_CONNECTION || 'mongodb://localhost:27017/test',
+    connection: `mongodb://${dbHost}:${dbPort}/${dbName}`,
     options: {
         useNewUrlParser: true,
         useUnifiedTopology: true,
@@ -16,7 +22,9 @@ exports.mongoConfig = {
 };
 
 exports.redisConfig = {
-    host: process.env.REDIS_HOST || 'redis://127.0.0.1:6379',
+    // host: process.env.REDIS_HOST || 'redis://127.0.0.1:6379',
+    // host: `redis://${process.REDIS_HOST}:${process.REDIS_PORT}`,
+    host: 'redis://redis:6379',
 };
 
 exports.commonConfig = {

@@ -69,7 +69,7 @@ class BaseRepository {
         }, options);
 
         newOptions.where = Object.assign({}, {
-            isActive: Common.STATUS.ACTIVE,
+            // isActive: Common.STATUS.ACTIVE,
         }, newOptions.where);
 
         return this.model.findOne(newOptions.where)

@@ -35,7 +35,7 @@ async function main() {
 
     // initialize components
     initTracer();
-    setupJob();
+    // setupJob();
 
     // inject tracer
     app.use(traceRequest);
@@ -47,10 +47,12 @@ async function main() {
     app.use(errorHandler(logger));
 
     await runServer(app, port);
+    console.log(`Server started at port ${serverConfig.port}`);
     logger.info(`Server started at port ${serverConfig.port}`);
 }
 
 main().catch(err => {
+    console.log(err);
     logger.error(err, 'kill process');
     process.exit(1);
 });
