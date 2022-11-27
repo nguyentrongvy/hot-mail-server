@@ -27,4 +27,9 @@ exports.load = app => {
         '/binance',
         postController.getInfoBinance,
     );
+
+    app.get(
+        '/test',
+        postController.test,
+    );
 };

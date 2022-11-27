@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node bin/index.js",
+    "start": "nodemon -L bin/index.js",
     "lint": "eslint \"**/*.js\"",
     "prepare": "husky install"
   },
@@ -38,6 +38,7 @@
     "lodash": "^4.17.21",
     "mongoose": "^6.0.12",
     "node-binance-api": "^0.13.1",
+    "nodemon": "^2.0.20",
     "prom-client": "^14.0.1",
     "redis": "^4.0.0",
     "source-map-support": "^0.5.21"

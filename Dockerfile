@@ -2,4 +2,4 @@ FROM node:latest
 WORKDIR /app
 COPY . .
 RUN npm install
-CMD ["npm", "start"]
+CMD ["npm", "run", "start"]

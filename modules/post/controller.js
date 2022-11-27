@@ -48,6 +48,10 @@ class PostController extends BaseController {
 
         res.success('');
     }
+
+    async test(req, res) {
+        res.success([1]);
+    }
 }
 
 module.exports = new PostController();
