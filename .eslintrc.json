@@ -11,8 +11,8 @@
         "ecmaVersion": 13
     },
     "rules": {
-        "quotes": ["error", "single"],
-        "indent": ["error", 4, { "SwitchCase": 1 }],
+        "quotes": ["error", "double"],
+        "indent": ["error", 2, { "SwitchCase": 1 }],
         "arrow-parens": ["error", "as-needed"],
         "padded-blocks": ["off"],
         "prefer-object-spread": ["off"],
